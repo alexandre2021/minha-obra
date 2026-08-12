@@ -13,6 +13,7 @@ export const AuthLayout = () => {
   const params = new URLSearchParams(hash.substring(1));
   const type = params.get('type');
   const isRecovery = type === 'recovery';
+  const isInvite = type === 'invite';
 
   if (carregando) {
     return (
@@ -22,12 +23,8 @@ export const AuthLayout = () => {
     );
   }
 
-  // Se a URL for para recuperação de senha, SEMPRE mostre a tela de definir senha,
-  // independentemente de haver uma sessão temporária.
-  if (isRecovery) {
-    return <DefinirSenha />;
-  }
-  if (isRecovery) {
+  if (isRecovery || isInvite) {
+    window.history.replaceState(null, '', ' ');
     return <DefinirSenha />;
   }
 

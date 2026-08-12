@@ -18,7 +18,7 @@ export const DefinirSenha = () => {
     const token = params.get('access_token');
     const type = params.get('type');
 
-    if (type === 'recovery' && token) {
+    if ((type === 'recovery' || type === 'invite') && token) {
       setAccessToken(token);
       supabase.auth.setSession({ access_token: token, refresh_token: '' });
     } else {
