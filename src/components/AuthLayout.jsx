@@ -29,7 +29,7 @@ export const AuthLayout = () => {
   }
 
   // Se for um fluxo de recuperação/definição de senha, mostra a tela específica
-  if (isRecovery && !session) {
+  if (isRecovery) { // Remove a verificação de !session
     return <DefinirSenha />;
   }
 
