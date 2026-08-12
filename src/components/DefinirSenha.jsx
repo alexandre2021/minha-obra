@@ -11,19 +11,21 @@ export const DefinirSenha = () => {
   const [accessToken, setAccessToken] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
-  // Lê o token da URL de forma síncrona na primeira renderização
   useEffect(() => {
-    const hash = window.location.hash;
-    const params = new URLSearchParams(hash.substring(1));
-    const token = params.get('access_token');
-    const type = params.get('type');
+    // O AuthLayout já limpou o hash, mas o Supabase client já processou o URL
+    // e a sessão temporária está ativa. Vamos pegar o token dessa sessão.
+    const getSessionToken = async () => {
+      const { data, error } = await supabase.auth.getSession();
+      if (error || !data.session) {
+        setError('Link inválido ou expirado. Por favor, solicite um novo convite.');
+        return;
+      }
+      setAccessToken(data.session.access_token);
+    };
 
-    if ((type === 'recovery' || type === 'invite') && token) {
-      setAccessToken(token);
-      supabase.auth.setSession({ access_token: token, refresh_token: '' });
-    } else {
-      setError('Link inválido ou expirado. Por favor, solicite um novo convite.');
-    }
+    getSessionToken();
+
+    const hash = window.location.hash;
     window.location.hash = ''; // Limpa o hash para evitar re-processamento
   }, []);
 
