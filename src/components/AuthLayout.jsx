@@ -14,18 +14,18 @@ export const AuthLayout = () => {
   const type = params.get('type');
   const isRecovery = type === 'recovery';
 
-  // Se for um fluxo de recuperação, limpa o hash da URL para evitar
-  // que o Supabase tente logar o usuário automaticamente em reloads.
-  if (isRecovery) {
-    window.location.hash = '';
-  }
-
   if (carregando) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center text-white text-lg">
         Carregando...
       </div>
     );
+  }
+
+  // Se a URL for para recuperação de senha, SEMPRE mostre a tela de definir senha,
+  // independentemente de haver uma sessão temporária.
+  if (isRecovery) {
+    return <DefinirSenha />;
   }
   if (isRecovery) {
     return <DefinirSenha />;

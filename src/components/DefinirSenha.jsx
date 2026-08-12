@@ -11,21 +11,20 @@ export const DefinirSenha = () => {
   const [accessToken, setAccessToken] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
+  // Lê o token da URL de forma síncrona na primeira renderização
   useEffect(() => {
-    // Extrai o token da URL
     const hash = window.location.hash;
     const params = new URLSearchParams(hash.substring(1));
     const token = params.get('access_token');
     const type = params.get('type');
 
-    // O Supabase usa `type=recovery` para links de redefinição e convite
     if (type === 'recovery' && token) {
       setAccessToken(token);
-      // Define o token na sessão atual do Supabase para autenticar a chamada de updateUser
       supabase.auth.setSession({ access_token: token, refresh_token: '' });
     } else {
       setError('Link inválido ou expirado. Por favor, solicite um novo convite.');
     }
+    window.location.hash = ''; // Limpa o hash para evitar re-processamento
   }, []);
 
   const handleSubmit = async (e) => {
