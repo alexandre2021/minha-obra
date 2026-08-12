@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useObra } from '../context/ObraContext';
 import { Login } from './Login';
 import { AppLayout } from './AppLayout';
@@ -7,13 +7,21 @@ import { DefinirSenha } from './DefinirSenha';
 export const AuthLayout = () => {
   const { session, carregando, signOutUser } = useObra();
 
-  // Verificação síncrona, fora do useEffect, para evitar race conditions.
-  // Isso garante que a verificação ocorra antes do primeiro render.
-  const hash = window.location.hash;
-  const params = new URLSearchParams(hash.substring(1));
-  const type = params.get('type');
-  const isRecovery = type === 'recovery';
-  const isInvite = type === 'invite';
+  // Lê o hash apenas UMA vez, na primeira renderização.
+  // Depois disso, mesmo que o hash seja limpo ou re-render aconteça,
+  // esse valor não muda.
+  const [authFlow] = useState(() => {
+    const hash = window.location.hash;
+    const params = new URLSearchParams(hash.substring(1));
+    const type = params.get('type');
+    return type === 'recovery' || type === 'invite' ? type : null;
+  });
+
+  useEffect(() => {
+    if (authFlow) {
+      window.history.replaceState(null, '', ' ');
+    }
+  }, [authFlow]);
 
   if (carregando) {
     return (
@@ -23,8 +31,7 @@ export const AuthLayout = () => {
     );
   }
 
-  if (isRecovery || isInvite) {
-    window.history.replaceState(null, '', ' ');
+  if (authFlow === 'recovery' || authFlow === 'invite') {
     return <DefinirSenha />;
   }
 
