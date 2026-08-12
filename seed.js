@@ -1,9 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
+import 'dotenv/config'; // Carrega as variáveis de .env
 
 // ATENÇÃO: Substitua pelas suas chaves do Supabase.
 // É seguro mantê-las aqui para um script de desenvolvimento, mas nunca as exponha no lado do cliente em produção.
-const supabaseUrl = 'https://leaifcptyahjaytjpdyr.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxlYWlmY3B0eWFoamF5dGpwZHlyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYxMzAzODcsImV4cCI6MjEwMTcwNjM4N30.u0ue2jgzZ1fw6EKd_uGk_LeMPiRWHGwcoAtvcquekE0';
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY;
 
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
