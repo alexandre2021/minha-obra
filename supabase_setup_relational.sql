@@ -1,5 +1,5 @@
 -- ===============================================================
--- SCRIPT SQL: MODELO RELACIONAL COMPLETO - MINHA OBRA (SUPABASE)
+-- SCRIPT SQL: MODELO RELACIONAL COMPLETO - MAIS OBRA (SUPABASE)
 -- Execute este script no SQL Editor do seu projeto Supabase
 -- https://supabase.com/dashboard/project/leaifcptyahjaytjpdyr/sql
 -- ===============================================================

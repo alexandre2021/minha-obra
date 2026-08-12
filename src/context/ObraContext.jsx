@@ -28,7 +28,7 @@ export const ObraProvider = ({ children }) => {
   const [data, setData] = useState(() => {
     // Nota: Com autenticação, o ideal é carregar dados com base no usuário,
     // não mais do localStorage. Manteremos por enquanto para não quebrar o app.
-    const saved = localStorage.getItem('minhaobra_relational_data');
+    const saved = localStorage.getItem('maisobra_relational_data');
     if (saved) {
       try { return JSON.parse(saved); } catch (e) {}
     }
@@ -36,7 +36,7 @@ export const ObraProvider = ({ children }) => {
   });
   const [obras, setObras] = useState([]);
   const [obraAtualId, setObraAtualId] = useState(() => {
-    const savedId = localStorage.getItem('minhaobra_obra_id');
+    const savedId = localStorage.getItem('maisobra_obra_id');
     return savedId || null;
   });
 
@@ -109,7 +109,7 @@ export const ObraProvider = ({ children }) => {
       
       if (idAtivo !== obraIdValida) {
         setObraAtualId(obraIdValida);
-        localStorage.setItem('minhaobra_obra_id', obraIdValida);
+        localStorage.setItem('maisobra_obra_id', obraIdValida);
       }
 
       const { data: dbObra, error: errObra } = await supabase
@@ -182,7 +182,7 @@ export const ObraProvider = ({ children }) => {
         };
 
         setData(novoEstado);
-        localStorage.setItem('minhaobra_relational_data', JSON.stringify(novoEstado));
+        localStorage.setItem('maisobra_relational_data', JSON.stringify(novoEstado));
         setSupabaseConectado(true);
       }
     } catch (err) {
@@ -196,7 +196,7 @@ export const ObraProvider = ({ children }) => {
   const selecionarObra = async (id) => {
     if (!id) return;
     setObraAtualId(id);
-    localStorage.setItem('minhaobra_obra_id', id);
+    localStorage.setItem('maisobra_obra_id', id);
     await carregarDadosDoSupabase(id);
   };
 
@@ -249,8 +249,8 @@ export const ObraProvider = ({ children }) => {
       } else {
         setData(initialFallbackData);
         setObraAtualId(null);
-        localStorage.removeItem('minhaobra_obra_id');
-        localStorage.removeItem('minhaobra_relational_data');
+        localStorage.removeItem('maisobra_obra_id');
+        localStorage.removeItem('maisobra_relational_data');
       }
     }
 

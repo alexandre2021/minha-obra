@@ -1,5 +1,5 @@
 -- Script SQL de Inicialização do ObraMaster no Supabase
--- Script SQL de Inicialização do Minha Obra no Supabase
+-- Script SQL de Inicialização do Mais Obra no Supabase
 -- Execute este script no SQL Editor do seu projeto Supabase (https://supabase.com/dashboard/project/leaifcptyahjaytjpdyr/sql)
 
 -- 1. Criar tabela de estado da obra

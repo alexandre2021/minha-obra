@@ -45,7 +45,7 @@ export const AppLayout = () => {
             <div className="p-5 bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl shadow-lg shadow-amber-500/20 text-slate-950 font-bold mb-6">
               <Building2 className="w-12 h-12" />
             </div>
-            <h2 className="text-2xl font-bold text-white">Bem-vindo ao Minha Obra!</h2>
+            <h2 className="text-2xl font-bold text-white">Bem-vindo ao Mais Obra!</h2>
             <p className="text-slate-400 mt-2 max-w-md">
               Parece que você ainda não tem nenhuma obra cadastrada.
               Clique no botão "+ Obra" no cabeçalho para começar a gerenciar seu primeiro projeto.

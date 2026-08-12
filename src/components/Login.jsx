@@ -29,7 +29,7 @@ export const Login = () => {
           <div className="inline-block p-3 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl shadow-lg shadow-amber-500/20 text-slate-950 font-bold mb-4">
             <Building2 className="w-10 h-10" />
           </div>
-          <h1 className="text-2xl font-extrabold text-white">MInha Obra</h1>
+          <h1 className="text-2xl font-extrabold text-white">Mais Obra</h1>
           <p className="text-slate-400 mt-1">Acesse para gerenciar suas obras.</p>
         </div>
 
